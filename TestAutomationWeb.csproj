@@ -58,7 +58,6 @@
     <Compile Include="BeadandoPageObjectTest.cs" />
     <Compile Include="FirstPageOfFNRVK86.cs" />
     <Compile Include="QuestionDecorator.cs" />
-    <Compile Include="SecondPageOfFNRVK86.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Question.cs" />
     <Compile Include="Option.cs" />
