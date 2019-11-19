@@ -37,7 +37,7 @@ namespace TestAutomationWeb
                 switch (number)
                 {
                     case 1:
-                        this.Answer_First(question, questionbody);
+                        //this.Answer_First(question, questionbody);
                         break;
 
                     case 2:
@@ -69,8 +69,7 @@ namespace TestAutomationWeb
                                 .Select(c => new { Text = c.FindElement(By.ClassName("radio-button-label-text"))?.Text, Container = c })
                                 .ToList();
             Assert.AreEqual(4, answeOptions.Count);
-            CollectionAssert.AreEqual()
-            // 0 1 2 10
+            // 0 1 2 10 CollectionAssert.AreEqual()
 
             foreach (var kvp in answeOptions)
                 this.ChooseThisOption(kvp.Container, choose(kvp.Text));
