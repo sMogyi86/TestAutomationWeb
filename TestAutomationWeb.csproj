@@ -56,11 +56,28 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="BeadandoPageObjectTest.cs" />
-    <Compile Include="Page.cs" />
-    <Compile Include="QuestionDecorator.cs" />
+    <Compile Include="Contract\IAnswer.cs" />
+    <Compile Include="Contract\IHaveAnswer.cs" />
+    <Compile Include="Model\IChangeRank.cs" />
+    <Compile Include="Contract\IChoosable.cs" />
+    <Compile Include="Contract\IHaveOptions.cs" />
+    <Compile Include="Contract\IOption.cs" />
+    <Compile Include="Contract\IQuestion.cs" />
+    <Compile Include="Model\Answer.cs" />
+    <Compile Include="Model\Page.cs" />
+    <Compile Include="Model\QuestionDecorator.cs" />
+    <Compile Include="Model\WithListBoxes.cs" />
+    <Compile Include="Model\ListElement.cs" />
+    <Compile Include="Model\Option.cs" />
+    <Compile Include="Model\RadioButton.cs" />
+    <Compile Include="Model\WithRadioButtons.cs" />
+    <Compile Include="Model\Rankable.cs" />
+    <Compile Include="Model\TextArea.cs" />
+    <Compile Include="Model\WebElement.cs" />
+    <Compile Include="Model\WithRankables.cs" />
+    <Compile Include="Model\WithTextArea.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Question.cs" />
-    <Compile Include="Option.cs" />
+    <Compile Include="Model\Question.cs" />
     <Compile Include="WebTestBase.cs" />
   </ItemGroup>
   <ItemGroup>

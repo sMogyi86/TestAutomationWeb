@@ -2,6 +2,8 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using TestAutomationWeb.Contract;
+using TestAutomationWeb.Model;
 
 namespace TestAutomationWeb
 {
@@ -32,12 +34,13 @@ namespace TestAutomationWeb
 
         public T GetQuestion<T>(int nth) where T : QuestionDecorator, new()
         {
-            var qd = new T();
+            T decorator = new T();
+            decorator.Question = GetQuestions().Single(q => q.Number == nth);
 
-            qd.Question = GetQuestions().Single(q => q.Number == nth);
-            qd.WebDriver = myWebDriver;
+            decorator.WebDriver = myWebDriver;
 
-            return qd;
+            decorator.Initialize();
+            return decorator;
         }
 
         public IEnumerable<Question> GetQuestions()
