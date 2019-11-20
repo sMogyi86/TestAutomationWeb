@@ -2,7 +2,6 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using TestAutomationWeb.Contract;
 using TestAutomationWeb.Model;
 
 namespace TestAutomationWeb
@@ -46,7 +45,7 @@ namespace TestAutomationWeb
         public IEnumerable<Question> GetQuestions()
             => myWebDriver
             .FindElements(By.ClassName(@" question-fieldset"))
-            .Select(c => new Question(c));
+            .Select(c => new Question() { Container = c });
 
         public bool Next()
         {

@@ -14,14 +14,13 @@ namespace TestAutomationWeb.Model
             base.Initialize();
 
             myOptionContainerHeight = Rankables.First().Container.Size.Height;
-            myOffsetPlus = myOptionContainerHeight / 3;
+            myOffsetPlus = myOptionContainerHeight / 4;
         }
 
         public IEnumerable<Rankable> Rankables
               => Question.Container.FindElements(By.ClassName(@"question-ranking-rank-wrapper"))
                         .Select((c, i) => new Rankable(c, this, i));
 
-        // https://www.google.com/search?q=selenium+DragAndDropToOffset&oq=selenium+DragAndDropToOffset&aqs=chrome..69i57j33.7112j0j7&sourceid=chrome&ie=UTF-8
         public void Move(Rankable item, int toRank)
         {
             int offset = toRank - item.Rank;

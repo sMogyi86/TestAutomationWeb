@@ -4,7 +4,11 @@ namespace TestAutomationWeb.Model
 {
     internal class TextArea : Answer
     {
-        public TextArea(IWebElement container, Question question) : base(container, question) { }
+        public TextArea(IWebElement container, Question question)
+        {
+            base.Container = container;
+            base.Question = question;
+        }
 
         public override string AnswerText => Container.GetAttribute("value");
 

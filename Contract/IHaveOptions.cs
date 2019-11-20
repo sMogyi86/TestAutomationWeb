@@ -2,8 +2,8 @@
 
 namespace TestAutomationWeb.Contract
 {
-    public interface IHaveOptions<T> where T: IOption
+    public interface IHaveOptions
     {
-        IEnumerable<T> Options { get; }
+        IEnumerable<IOption> Options { get; }
     }
 }

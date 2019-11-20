@@ -5,9 +5,7 @@ namespace TestAutomationWeb.Model
 {
     internal abstract class Answer : WebElement, IAnswer
     {
-        protected readonly Question myQuestion;
-
-        public Answer(IWebElement container, Question question) : base(container) { myQuestion = question; }
+        public Question Question { get; set; }
 
         public abstract string AnswerText { get; }
     }
