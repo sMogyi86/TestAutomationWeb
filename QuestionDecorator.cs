@@ -79,4 +79,10 @@ namespace TestAutomationWeb
     {
         void Move(Rankable item, int toRank);
     }
+
+    class TextAreadDecorator : QuestionDecorator<TextArea>
+    {
+        public override IEnumerable<TextArea> Options
+            => new TextArea[] { new TextArea(Question.Container.FindElement(By.TagName("textarea")), Question) };
+    }
 }

@@ -57,4 +57,14 @@ namespace TestAutomationWeb
             }
         }
     }
+
+    class TextArea : Option
+    {
+        public TextArea(IWebElement container, Question question) : base(container, question)        {        }
+
+        public override string Answer => Container.GetAttribute("value");
+
+        public void SetAnswer(string answer)
+            => Container.SendKeys(answer);
+    }
 }
