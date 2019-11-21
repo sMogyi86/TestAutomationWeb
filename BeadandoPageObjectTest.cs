@@ -1,6 +1,9 @@
 ﻿using NUnit.Framework;
+using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using System.Xml.Linq;
 using TestAutomationWeb.Contract;
 using TestAutomationWeb.Model;
 
@@ -10,29 +13,29 @@ namespace TestAutomationWeb
     {
         private const string URL = @"https://www.surveymonkey.com/r/FNRVK86";
 
-        [Test]
-        public void NeedCreditsVeryMuch()
+        [Test, TestCaseSource(nameof(TestData))]
+        public void NeedCreditsVeryMuch(Case c)
         {
             var currentPage = Page.StartNew(URL, Driver);
             StringAssert.Contains("Obuda2019OszBeadando", currentPage.Title, "Page title failed!");
 
             TestWithOptions(currentPage.GetQuestion<WithRadioButtons>(1), new Expected()
             {
-                Choosen = "2",
+                Choosen = c[1],
                 Options = new string[] { "0", "1", "2", "10" },
                 Text = @"Hány előadó lenne optimális ebből a modulból?"
             });
 
             TestWithOptions(currentPage.GetQuestion<WithRadioButtons>(2), new Expected()
             {
-                Choosen = "Pont eleget",
+                Choosen = c[2],
                 Options = new string[] { "Túl sokat", "Sokat", "Pont eleget", "Keveset", "Nagyon keveset" },
                 Text = @"Mennyi időt biztosítottunk a gyakorlati feladatok megoldására?"
             });
 
             TestWithOptions(currentPage.GetQuestion<WithListBox>(3), new Expected()
             {
-                Choosen = "Webdriver advanced",
+                Choosen = c[3],
                 Options = new string[] { "Webdriver basics", "Webdriver advanced", "Page Object", "Data driven testing (DDT)", "Specflow" },
                 Text = @"Mivel foglalkoztál volna többet"
             });
@@ -54,7 +57,7 @@ namespace TestAutomationWeb
 
             TestWithOptions(currentPage.GetQuestion<WithRadioButtons>(5), new Expected()
             {
-                Choosen = "Pont jó",
+                Choosen = c[5],
                 Options = new string[] { "Túl nehéz", "Nehéz", "Pont jó", "Könnyű", "Túl könnyű" },
                 Text = @"Milyen nehéznek értékeled az órai feladatokat?"
             });
@@ -63,7 +66,7 @@ namespace TestAutomationWeb
             var q6 = currentPage.GetQuestion<WithTextArea>(6);
             StringAssert.AreEqualIgnoringCase("Egyéb javaslatok, megjegyzések", q6.QuestionText, "Question text failed!");
 
-            var expectedNotes = "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis id sapien convallis, ullamcorper tellus id, fringilla lectus. Vestibulum id odio et metus porttitor accumsan nec pulvinar eros. Ut nec turpis tempus, auctor nisl eget, eleifend leo. Aliquam sagittis mauris at sollicitudin imperdiet. Ut sed faucibus libero, luctus maximus lorem. Vestibulum sit amet eros turpis. Nulla tincidunt libero ligula, vel sollicitudin ex finibus quis. Quisque tincidunt velit ac ipsum mollis, vitae congue sapien convallis. Sed quis bibendum enim. Aenean dapibus leo et mauris vestibulum pulvinar. Vestibulum viverra massa sit amet diam consequat, vitae varius dui placerat. Donec feugiat nulla faucibus velit pellentesque aliquet. Ut eget nibh ut risus egestas vehicula et ac orci.";
+            var expectedNotes = c[6];
             q6.TextArea.SetAnswer(expectedNotes);
             StringAssert.AreEqualIgnoringCase(expectedNotes, q6.TheGivenAnswer, "Set answer text failed!");
             #endregion
@@ -86,12 +89,30 @@ namespace TestAutomationWeb
             Assert.AreEqual(expected.Choosen, question.TheGivenAnswer, "Set choosen failed!");
         }
 
+        static IEnumerable TestData()
+            => XElement.Load(System.IO.Path.Combine(AppDomain.CurrentDomain.BaseDirectory) + "\\data.xml")
+            .Descendants("case")
+            .Select(n => new Case(n));
+
         private class Expected
         {
             public string Text { get; set; }
             public int OptionsCount => Options.Count();
             public IEnumerable<string> Options { get; set; }
             public string Choosen { get; set; }
+        }
+
+        public class Case
+        {
+            private readonly XElement myRoot;
+
+            public string this[int questionNumber]
+                => myRoot
+                .Elements("question")
+                .Single(e => int.Parse(e.Attribute("number").Value) == questionNumber)
+                .Attribute("answer").Value;
+
+            public Case(XElement root) { myRoot = root; }
         }
     }
 }

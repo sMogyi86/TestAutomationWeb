@@ -1,0 +1,16 @@
+﻿<cases>
+  <case>
+    <question number ="1" answer="2" />
+    <question number ="2" answer="Pont eleget" />
+    <question number ="3" answer="Webdriver advanced" />
+    <question number ="5" answer="Pont jó" />
+    <question number ="6" answer="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis id sapien convallis, ullamcorper tellus id, fringilla lectus. Vestibulum id odio et metus porttitor accumsan nec pulvinar eros. Ut nec turpis tempus, auctor nisl eget, eleifend leo." />
+  </case>
+  <case>
+    <question number ="1" answer="10" />
+    <question number ="2" answer="Sokat" />
+    <question number ="3" answer="Page Object" />
+    <question number ="5" answer="Nehéz" />
+    <question number ="6" answer="Lorem ipsum dolor sit amet, aliquam sagittis mauris at sollicitudin imperdiet. Ut sed faucibus libero, luctus maximus lorem. Vestibulum sit amet eros turpis. Nulla tincidunt libero ligula, vel sollicitudin ex finibus quis. Quisque tincidunt velit ac ipsum mollis, vitae congue sapien convallis. Sed quis bibendum enim. Aenean dapibus leo et mauris vestibulum pulvinar. Vestibulum viverra massa sit amet diam consequat, vitae varius dui placerat. Donec feugiat nulla faucibus velit pellentesque aliquet. Ut eget nibh ut risus egestas vehicula et ac orci." />
+  </case>
+</cases>
