@@ -6,7 +6,16 @@ using TestAutomationWeb.Model;
 
 namespace TestAutomationWeb
 {
-    class Page
+    interface IPage
+    {
+        string Title { get; }
+        T GetQuestion<T>(int nth) where T : QuestionDecorator, new();
+        bool Next();
+        void Prev();
+        bool Done();
+    }
+
+    class Page : IPage
     {
         private readonly IWebDriver myWebDriver;
         private readonly string myUrl;
@@ -20,7 +29,7 @@ namespace TestAutomationWeb
         private void NavigateToUrl()
             => myWebDriver.Navigate().GoToUrl(myUrl);
 
-        public static Page StartNew(string url, IWebDriver webDriver)
+        public static IPage StartNew(string url, IWebDriver webDriver)
         {
             var p = new Page(url, webDriver);
 

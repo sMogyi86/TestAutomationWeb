@@ -1,10 +1,11 @@
 ﻿using NUnit.Framework;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Chrome;
+using TechTalk.SpecFlow;
 
 namespace TestAutomationWeb
 {
-    [TestFixture]
+    [Binding]    //[TestFixture]
     class WebTestBase
     {
         private IWebDriver myWebDriver;
@@ -30,5 +31,24 @@ namespace TestAutomationWeb
         [TearDown]
         public void TearDown()
             => myWebDriver?.Quit();
+
+
+        public static string webDriver = "driver";
+
+        [BeforeScenario]
+        public void BeforeScenario()
+        {
+            ChromeOptions options = new ChromeOptions();
+            options.AddArguments("--lang=hu");
+            var driver = new ChromeDriver(options);
+            ScenarioContext.Current.Add(webDriver, driver);
+        }
+
+        [AfterScenario]
+        public void AfterScenario()
+        {
+            var driver = ScenarioContext.Current.Get<IWebDriver>(webDriver); ;
+            driver.Quit();
+        }
     }
 }

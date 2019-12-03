@@ -1,6 +1,6 @@
 ﻿namespace TestAutomationWeb.Contract
 {
-    interface IHaveAnswer
+    interface IHaveAnswer: IQuestion
     {
         string TheGivenAnswer { get; }
     }

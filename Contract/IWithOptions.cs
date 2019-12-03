@@ -1,4 +1,4 @@
 ﻿namespace TestAutomationWeb.Contract
 {
-    interface IWithOptions : IQuestion, IHaveAnswer, IHaveOptions { }
+    interface IWithOptions : IHaveAnswer, IHaveOptions { }
 }
